@@ -21,8 +21,8 @@ class EmployeeRequest extends BaseRequest
             'last_name' => 'required|string',
             'start_date' => 'required|date|after:yesterday',
             'end_date' => 'nullable|date|after_or_equal:start_date',
-            'social_security_number' => 'required|string',
-            'citizen_number' => 'required|string',
+            'social_security_number' => 'required|string|unique:employees',
+            'citizen_number' => 'required|string|unique:employees',
         ];
     }
 }
