@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('employee', App\Http\Controllers\EmployeeController::class);
 Route::apiResource('employee.leave', App\Http\Controllers\LeaveController::class);
+Route::get('filter', [App\Http\Controllers\FilterController::class, 'index']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
