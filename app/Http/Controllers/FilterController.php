@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Http\Resources\EmployeeResource;
-use App\Traits\Search;
-use Carbon\Carbon;
 
 class FilterController extends Controller
 {
