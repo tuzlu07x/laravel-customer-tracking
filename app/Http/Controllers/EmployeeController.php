@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeeRequest;
+use App\Http\Resources\EmployeeResource;
 use App\Models\Employe;
 use App\Models\Employee;
 use Illuminate\Http\Request;
@@ -15,7 +17,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::with('leaves')->all();
+        $employees = Employee::with('leaves')->paginate();
+
+        return EmployeeResource::collection($employees);
     }
 
     /**
@@ -24,9 +28,12 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
-        //
+        $data = $request->validated();
+        $employe = Employee::create($data);
+
+        return EmployeeResource::make($employe);
     }
 
     /**
@@ -47,9 +54,12 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employe)
+    public function update(EmployeeRequest $request, Employee $employe)
     {
-        //
+        $data = $request->validated();
+        $employe->update($data);
+
+        return EmployeeResource::make($employe);
     }
 
     /**
@@ -60,6 +70,11 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employe)
     {
-        //
+        $employe->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Employee deleted successfully',
+        ]);
     }
 }
