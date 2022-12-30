@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('last_name');
             $table->date('start_date');
             $table->date('end_date')->nullable();
-            $table->string('social_security_number');
-            $table->string('citizen_number');
+            $table->string('social_security_number')->unique();
+            $table->string('citizen_number')->unique();
 
             $table->timestamps();
         });
