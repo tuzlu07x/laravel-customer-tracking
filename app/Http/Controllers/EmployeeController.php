@@ -54,12 +54,12 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(EmployeeRequest $request, Employee $employe)
+    public function update(EmployeeRequest $request, Employee $employee)
     {
         $data = $request->validated();
-        $employe->update($data);
+        $employee->update($data);
 
-        return EmployeeResource::make($employe);
+        return EmployeeResource::make($employee);
     }
 
     /**
@@ -68,9 +68,9 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employe  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employe)
+    public function destroy(Employee $employee)
     {
-        $employe->delete();
+        $employee->delete();
 
         return response()->json([
             'success' => true,
